@@ -60,10 +60,10 @@ int main (void) {
     }
 
     test_operation<64>(numeros[0],numeros[1]);
-    //std::cout << "--------------------------------------------\n";
-    //test_operation<64>(numeros[2],numeros[3]);
-    //std::cout << "--------------------------------------------\n";
-    //test_operation<64>(numeros[4],numeros[5]);
-
+    std::cout << "--------------------------------------------\n";
+    test_operation<64>(numeros[2],numeros[3]);
+    std::cout << "--------------------------------------------\n";
+    test_operation<64>(numeros[4],numeros[5]);
+    
     return 0;
 }

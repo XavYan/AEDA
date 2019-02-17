@@ -209,7 +209,7 @@ int Number<N,B,T>::digits (void) const {
 
   template<std::size_t N, std::size_t B, class T>
   Number<N,B,T> Number<N,B,T>::operator/ (const Number<N,B,T>& num) {
-    assert(greater(*this,num) == 0 || greater(*this,num) == -1);
+    if(greater(*this,num) == 1) return Number<N,B,T>();
 
     int cociente = 0;
     Number<N,B,T> resto = *this;
