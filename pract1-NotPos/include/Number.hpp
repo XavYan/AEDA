@@ -4,15 +4,6 @@
 #include <vector>
 #include <cassert>
 #include <cstdlib>
-#include <cmath> //Para usar potencias
-
-/**
- * TAREAS:
- *  - HACER QUE SUB Y ADD SE USEN 2 PARAMETROS EN VEZ DE UNO
- *  - REPROGRAMAR LOS OPERADORES + Y -
- *  - SACAR LOS METODOS FUERA DE LA CLASE
- *  - HACER METODO OPPOSITE, QUE DEVUELVE EL NUMERO CON SIGNO OPUESTO
- * */
 
 //Los unsigned char usan un rango entre 0 y 255. Los char usan valores con signo para su representacion numerica
 template<std::size_t N, std::size_t B, class T = char>
@@ -219,7 +210,15 @@ int Number<N,B,T>::digits (void) const {
       cociente++;
     } while (greater(resto,num) == 0 || greater(resto,num) == -1); // cociente >= num
 
-    return Number<N,B,T>(cociente);
+    Number<N,B,T> coc(cociente);
+
+    if (sign_ == num.is_negative()) {
+      coc.set_sign(0);
+    } else {
+      coc.set_sign(1);
+    }
+
+    return coc;
   }
 
 //METODOS PRIVADOS///////////////////////////////////////////

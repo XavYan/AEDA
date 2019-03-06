@@ -47,16 +47,17 @@ void test_operation (const int num1, const int num2) {
 }
 
 int main (int argc, char* argv[]) {
-    std::cout << "Probando...\n";
+    // std::cout << "Probando...\n";
 
-    int numeros[] = { 255, -17, -11, -29, -16, -47 };
+    int numeros[] = { 25, 5, -10, 5, 3, 6, -1, -3, -2, 0 };
+
+    int cantidad = sizeof(numeros) / sizeof(int);
     
     //Si no hay argumentos por consola, utiliza los descritos en el vector numeros
-    if (argc <= 1) {
+    /*if (argc <= 1) {
 
         //Hallamos la cantidad de numeros
         //(asi evitamos que el programos las tenga que contar)
-        int cantidad = sizeof(numeros) / sizeof(int);
 
         for (int i = 1; i < cantidad; i++) {
             test<64>(numeros[i]);
@@ -68,13 +69,13 @@ int main (int argc, char* argv[]) {
             test<64>(std::stoi(str));
             std::cout << "--------------------------------------------\n";
         }
-    }
+    }*/
 
-    test_operation<64>(numeros[0],numeros[1]);
+    test_operation<10>(numeros[0],numeros[1]);
     std::cout << "--------------------------------------------\n";
-    //test_operation<64>(numeros[2],numeros[3]);
+    test_operation<10>(numeros[2],numeros[3]);
     std::cout << "--------------------------------------------\n";
-    //test_operation<64>(numeros[4],numeros[5]);
-    
+    test_operation<10>(numeros[cantidad-2],numeros[cantidad-1]);
+
     return 0;
 }
