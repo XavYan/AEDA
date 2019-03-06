@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cassert>
 #include <cstdlib>
+#include "../include/NumberException.hpp"
 
 //Los unsigned char usan un rango entre 0 y 255. Los char usan valores con signo para su representacion numerica
 template<std::size_t N, std::size_t B, class T = char>
@@ -56,6 +57,9 @@ private:
 template<std::size_t N, std::size_t B, class T>
 Number<N,B,T>::Number (int value): number_(NULL), sign_(0) {
 
+  //Para tipo 'int' no es posible bases superiores a 10
+  if (!(std::is_same<T,char>::value) && B > 10) throw invalid_argument_exception();
+
   number_ = new T [N];
 
   //Inicializamos los valores
@@ -77,6 +81,10 @@ Number<N,B,T>::Number (int value): number_(NULL), sign_(0) {
 
 template <std::size_t N, std::size_t B, class T>
 Number<N, B, T>::Number(const Number<N, B, T> &A) : number_(new T [N]), sign_(0) {
+
+  //Para tipo 'int' no es posible bases superiores a 10
+  if (!(std::is_same<T,char>::value) && B > 10) throw invalid_argument_exception();
+
   *this = A;
 }
 
@@ -184,6 +192,7 @@ Number<N,B,T> Number<N,B,T>::reverse (void) const {
     Number<N,B,T> sum;
 
     //Casos posibles
+
     // (+A)+(+B)=(+)(A+B) -> suma
     // (-A)+(-B)=(-)(A+B) -> suma
     // (+A)+(-B)=(?)(A-B) -> resta (signo y resultado dependera del mayor)
@@ -255,7 +264,7 @@ Number<N,B,T> Number<N,B,T>::reverse (void) const {
 
   template<std::size_t N, std::size_t B, class T>
   Number<N,B,T> Number<N,B,T>::operator/ (const Number<N,B,T>& num) {
-    assert(!(num == 0));
+    if (num == 0) throw invalid_argument_exception();
     if(*this < num) return Number<N,B,T>();
 
     int cociente = 0;
@@ -312,10 +321,9 @@ bool Number<N,B,T>::operator== (const Number<N,B,T>& num) const {
 //METODOS PRIVADOS///////////////////////////////////////////
 template<std::size_t N, std::size_t B, class T>
 void Number<N,B,T>::to_base (int n) {
-  assert((std::is_same<T,char>::value) || B <= 10); //Para tipo 'int' la base no puede ser > 10.
   int div = n, it = 0;
   do {
-    assert(it+1 <= N);
+    if (it+1 > N) throw overflow_exeption();
     number_[it++] = (div%B >= 10 ? div%B+55 : div%B + (std::is_same<T, char>::value ? '0' : 0));
     div /= B;
   } while (div >= B);
@@ -365,7 +373,8 @@ Number<N,B,T> Number<N,B,T>::add (const Number<N,B,T>& Num1, const Number<N,B,T>
     if (std::is_same<T,char>::value && sum >= 10) result[i] = sum + 55;
     else result[i] = sum + (std::is_same<T,char>::value ? '0' : 0);
   }
-  assert(carry == 0); //Si carry = 1 significa que hay overflow
+  //Si carry = 1 significa que hay overflow
+  if (carry != 0) throw overflow_exeption();
     
   Number<N,B,T> final_number;
   for (int i = 0; i < N; i++) {
@@ -485,8 +494,9 @@ Number<N,B,T> Number<N,B,T>::mult (const Number<N,B,T>& Num1, const Number<N,B,T
   }
 
   //Nos aseguramos que no se pase del tamaño N
-  for (int i = 2*N-1; i <= N; i++) {
-    assert(sum[i] == 0); //Si ocurriera lo contrario (sum[i] != 0) habria overflow
+  for (int i = 2*N-1; i >= N; i--) {
+    //Si ocurriera habria overflow
+    if (sum[i] != (std::is_same<T,char>::value ? '0' : 0)) throw overflow_exeption();
   }
 
   //Convertimos a un Number de N digitos, que es lo que buscamos
@@ -566,6 +576,7 @@ Number<N,2,T>::Number (int value): number_(NULL) {
 
   if (value < 0) {
     to_base(value*(-1)); //Nos generara el numero en binario natural
+    if (number_[N-1] == 1) throw overflow_exeption();
     set_sign(1); //Cambiamos a negativo
   } else if (value > 0) {
     to_base(value);
@@ -574,7 +585,7 @@ Number<N,2,T>::Number (int value): number_(NULL) {
 
 template <std::size_t N, class T>
 Number<N,2,T>::Number(const Number<N, 2, T> &A) : number_(NULL) {
-  
+
   number_ = new T [N];
 
   *this = A;
@@ -703,17 +714,22 @@ Number<N,2,T> Number<N,2,T>::operator* (const Number<N,2,T>& num) {
   // (+A) x (-B) = (-)(AxB)
   // (-A) x (+B) = (-)(AxB)
 
-  
+  result = mult(abs(), num.abs());
 
-  result = mult(*this, num);
+  if (is_negative() == num.is_negative()) {
+    result.set_sign(0);
+  } else {
+    result.set_sign(1);
+  }
 
   return result;
 }
 
 template<std::size_t N, class T>
 Number<N,2,T> Number<N,2,T>::operator/ (const Number<N,2,T>& num) {
-  assert(!(num == 0));
-  if(*this < num) return Number<N,2,T>();
+  if (num == 0) throw invalid_argument_exception(); //No se puede dividir entre 0
+
+  if(abs() < num.abs()) return Number<N,2,T>();
 
   int cociente = 0;
   Number<N,2,T> resto = abs();
@@ -797,10 +813,9 @@ if (is_negative() == num.is_negative()) {
 //METODOS PRIVADOS///////////////////////////////////////////
 template<std::size_t N, class T>
 void Number<N,2,T>::to_base (int n) {
-  assert((std::is_same<T,char>::value)); //Para tipo 'int' la base no puede ser > 10.
   int div = n, it = 0;
   do {
-    assert(it+1 <= N);
+    if (it+1 > N) throw overflow_exeption();
     number_[it++] = (div%2 >= 10 ? div%2+55 : div%2 + (std::is_same<T, char>::value ? '0' : 0));
     div /= 2;
   } while (div >= 2);
@@ -853,7 +868,7 @@ Number<N,2,T> Number<N,2,T>::add (const Number<N,2,T>& Num1, const Number<N,2,T>
 
   //Comprobamos el overflow
   if (Num1.is_negative() == Num2.is_negative()) { //Si los signos son iguales, hay posible overflow
-    assert(result[N-1] == Num1[N-1]);
+    if (result[N-1] != Num1[N-1]) throw overflow_exeption();
   }
 
   Number<N,2,T> final_number;
@@ -923,8 +938,9 @@ Number<N,2,T> Number<N,2,T>::mult (const Number<N,2,T>& Num1, const Number<N,2,T
   }
 
   //Nos aseguramos que no se pase del tamaño N
-  for (int i = 2*N-1; i <= N; i++) {
-    assert(sum[i] == 0); //Si ocurriera lo contrario (sum[i] != 0) habria overflow
+  for (int i = 2*N-1; i >= N; i--) {
+    //Si ocurriera habria overflow
+    if (sum[i] != (std::is_same<T,char>::value ? '0' : 0)) throw overflow_exeption();
   }
 
   //Convertimos a un Number de N digitos, que es lo que buscamos
