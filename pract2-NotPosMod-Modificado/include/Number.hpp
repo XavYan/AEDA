@@ -38,6 +38,7 @@ public:
   Number<N,B,T> operator- (const Number<N,B,T>& num);
   Number<N,B,T> operator* (const Number<N,B,T>& num);
   Number<N,B,T> operator/ (const Number<N,B,T>& num);
+  operator Number<N+1,B,T> (void);
 
 
   //Comparadores
@@ -286,6 +287,12 @@ Number<N,B,T> Number<N,B,T>::reverse (void) const {
     }
     return coc;
   }
+
+template <std::size_t N, std::size_t B, class T>
+Number<N,B,T>::operator Number<N+1,B,T>(void) {
+    Number<N+1,B,T> result;
+    return result;
+}
   
 template<std::size_t N, std::size_t B, class T>
 bool Number<N,B,T>::operator> (const Number<N,B,T>& num) const {
@@ -376,8 +383,20 @@ Number<N,B,T> Number<N,B,T>::add (const Number<N,B,T>& Num1, const Number<N,B,T>
     else result[i] = sum + (std::is_same<T,char>::value ? '0' : 0);
   }
   //Si carry = 1 significa que hay overflow
-  if (carry != 0) throw overflow_exeption();
+  if (carry != 0)
+  {
+    std::cout << "Ha ocurrido un overflow:";
+    Number<N+1,B,T> overflow;
+    for (int i = 0; i < N+1; i++) {
+      overflow[i] = result[i];
+    }
+    overflow[N] = carry + (std::is_same<T,char>::value ? '0' : 0);
+    std::cout << "Resultado: " << overflow << '\n';
+    throw overflow_exeption();
+  }
 
+  
+    
   Number<N,B,T> final_number;
   for (int i = 0; i < N; i++) {
     final_number[i] = result[i];
@@ -545,6 +564,7 @@ public:
   Number<N,2,T> operator- (const Number<N,2,T>& num);
   Number<N,2,T> operator* (const Number<N,2,T>& num);
   Number<N,2,T> operator/ (const Number<N,2,T>& num);
+  operator Number<N+1,2,T> (void);
 
   //Comparadores
   bool operator> (const Number<N,2,T>& num) const;
@@ -756,6 +776,12 @@ Number<N,2,T> Number<N,2,T>::operator/ (const Number<N,2,T>& num) {
 }
 
 template <std::size_t N, class T>
+Number<N,2,T>::operator Number<N+1,2,T>(void) {
+    Number<N+1,2,T> result;
+    return result;
+}
+
+template <std::size_t N, class T>
 bool Number<N, 2, T>::operator>(const Number<N, 2, T> &num) const
 {
   if (is_negative() == num.is_negative()) {
@@ -872,8 +898,19 @@ Number<N,2,T> Number<N,2,T>::add (const Number<N,2,T>& Num1, const Number<N,2,T>
 
   //Comprobamos el overflow
   if (Num1.is_negative() == Num2.is_negative()) { //Si los signos son iguales, hay posible overflow
-    if (result[N-1] != Num1[N-1]) throw overflow_exeption();
+    if (result[N-1] != Num1[N-1]) {
+      
+      std::cout << "Overflow exception. Should be: ";
+      Number<N+1,2,T> overflow;
+      for (int i = 0; i < N; i++) {
+        overflow[i] = result[i];
+      }
+      overflow[N] = Num1[N-1];
+      std::cout << overflow << '\n';
+      throw overflow_exeption();
+    }
   }
+
   Number<N,2,T> final_number;
   for (int i = 0; i < N; i++) {
     final_number[i] = result[i];

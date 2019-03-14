@@ -192,7 +192,7 @@ void test_operation (const int num1, const int num2) {
 
 int main (int argc, char* argv[]) {
 
-    int numeros[] = { -7, -2, -8, 7, -6, 5 };
+    int numeros[] = { -9, -2, -8, 7, -6, 5 };
 
     int cantidad = sizeof(numeros) / sizeof(int);
     test_operation<4>(numeros[0],numeros[1]);

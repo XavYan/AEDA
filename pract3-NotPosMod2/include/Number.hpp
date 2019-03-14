@@ -5,10 +5,11 @@
 #include <cstdlib>
 #include <cmath>
 #include "../include/NumberException.hpp"
+#include "../include/NumberBase.hpp"
 
 //Los unsigned char usan un rango entre 0 y 255. Los char usan valores con signo para su representacion numerica
 template<std::size_t N, std::size_t B, class T = char>
-class Number {
+class Number : NumberBase {
 private:
   T* number_;
   bool sign_;
@@ -58,7 +59,7 @@ private:
 
 //METODOS PUBLICOS///////////////////////////////////////////////
 template<std::size_t N, std::size_t B, class T>
-Number<N,B,T>::Number (int value): number_(NULL), sign_(0) {
+Number<N,B,T>::Number (int value): number_(NULL), sign_(0), NumberBase(N,B) {
 
   //Para tipo 'int' no es posible bases superiores a 10
   if (!(std::is_same<T,char>::value) && B > 10) throw invalid_argument_exception();
@@ -83,7 +84,7 @@ Number<N,B,T>::Number (int value): number_(NULL), sign_(0) {
 }
 
 template <std::size_t N, std::size_t B, class T>
-Number<N, B, T>::Number(const Number<N, B, T> &A) : number_(new T [N]), sign_(0) {
+Number<N, B, T>::Number(const Number<N, B, T> &A) : number_(new T [N]), sign_(0), NumberBase(N,B) {
 
   //Para tipo 'int' no es posible bases superiores a 10
   if (!(std::is_same<T,char>::value) && B > 10) throw invalid_argument_exception();
@@ -535,7 +536,7 @@ Number<N,B,T> Number<N,B,T>::mult (const Number<N,B,T>& Num1, const Number<N,B,T
 
 // CLASE ESPECIAL PARA BASE = 2 ////////////////////////////////////////////////////////////////////
 template <std::size_t N, class T>
-class Number<N,2,T> {
+class Number<N,2,T> : NumberBase {
 private:
   T* number_;
 public:
@@ -583,9 +584,9 @@ private:
 
 //METODOS PUBLICOS///////////////////////////////////////////////
 template<std::size_t N, class T>
-Number<N,2,T>::Number (int value): number_(NULL) {
+Number<N,2,T>::Number (int value): number_(NULL), NumberBase(N,2) {
 
-  if (pow(2,N-1)*(-1) <= value && value >= (pow(2,N-1)-1)) throw overflow_exeption();
+  if (value < pow(2,N-1)*(-1) || value > (pow(2,N-1)-1)) throw overflow_exeption();
 
   number_ = new T [N];
 
@@ -608,7 +609,7 @@ Number<N,2,T>::Number (int value): number_(NULL) {
 }
 
 template <std::size_t N, class T>
-Number<N,2,T>::Number(const Number<N, 2, T> &A) : number_(NULL) {
+Number<N,2,T>::Number(const Number<N, 2, T> &A) : number_(NULL), NumberBase(N,2) {
 
   number_ = new T [N];
 
