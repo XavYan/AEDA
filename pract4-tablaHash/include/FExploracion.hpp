@@ -20,8 +20,8 @@ FExploracionBase<CLAVE>::FExploracionBase (void) {}
 template <class CLAVE>
 FExploracionBase<CLAVE>::~FExploracionBase (void) {}
 
-template <class CLAVE>
-int FExploracionBase<CLAVE>::operator() (const CLAVE& x, const int& i) { return 0; }
+// template <class CLAVE>
+// int FExploracionBase<CLAVE>::operator() (const CLAVE& x, const int& i) { return 0; }
 
 template <class CLAVE>
 class FExploracionLineal : public FExploracionBase<CLAVE> {
@@ -34,7 +34,7 @@ class FExploracionLineal : public FExploracionBase<CLAVE> {
     ~FExploracionLineal (void) {}
 
     int operator() (const CLAVE& x, const int& i) {
-        return (*fd_(x)+i) % nCeldas_;
+        return (fd_->operator()(x)+i) % nCeldas_;
     }
 };
 
@@ -50,7 +50,7 @@ class FExploracionCuadrado : public FExploracionBase<CLAVE> {
     ~FExploracionCuadrado (void) {}
 
     int operator() (const CLAVE& x, const int& i) {
-        return (*fd_(x)+static_cast<int>(pow(i,2))) % nCeldas_;
+        return (fd_->operator()(x)+static_cast<int>(pow(i,2))) % nCeldas_;
     }
 };
 
@@ -65,8 +65,8 @@ class FExploracionDispDoble : public FExploracionBase<CLAVE> {
     ~FExploracionDispDoble (void) {}
 
     int operator() (const CLAVE& x, const int& i) {
-        const FDispersionMod<CLAVE> fd2(nCeldas_);
-        return *fd_(x) + i * fd2(x);
+        const FDispersionPseudo<CLAVE> fd2(nCeldas_);
+        return (fd_->operator()(x) + i * fd2(x)) % nCeldas_;
     }
 };
 
@@ -80,8 +80,12 @@ class FExploracionReDisp : public FExploracionBase<CLAVE> {
     FExploracionReDisp (int nCeldas, FDispersionBase<CLAVE>* fd) : nCeldas_(nCeldas), fd_(fd) {}
     ~FExploracionReDisp (void) {}
 
-    int operator() (const CLAVE& x, const int& i) { //HAY QUE REVISAR QUE MÉTODO QUIERE EL PROFESOR Y CAMBIARLO
-        std::cout << "Operacion no implementada.\n";
-        return 1000;
+    int operator() (const CLAVE& x, const int& i) { //FALLA, REVISAR
+        srand(x);
+        int result;
+        for (int j = 0; j < i; j++) {
+            result = rand() % nCeldas_;
+        }
+        return result;
     }
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include<vector>
 
 /*
     El -1 indica que esta vacio
@@ -13,7 +14,7 @@ class Celda {
 
     int nClaves_; //Cantidad de bloques totales
     int nBloques_; //Registra la cantidad de bloques ocupados
-    CLAVE* v_;
+    std::vector<CLAVE> v_;
     
     public:
 
@@ -29,17 +30,19 @@ template<class CLAVE>
 Celda<CLAVE>::Celda (int nClaves) {
     nClaves_ = nClaves;
     nBloques_ = 0;
-    v_ = new CLAVE [nClaves_];
+    v_.resize(nClaves_);
 }
 
 template<class CLAVE>
 Celda<CLAVE>::~Celda (void) {
-    delete [] v_;
+    v_.clear();
 }
 
 template<class CLAVE>
 bool Celda<CLAVE>::search (CLAVE key) {
+    // std::cout << "Tamaño del vector v_ vs nClaves_: " << v_.size() << ',' << nClaves_ << '\n';
     for (int i = 0; i < nClaves_; i++) {
+        // std::cout << "Elemento " << v_[i] << " vs " << key << '\n';
         if (key == v_[i]) {
             return true;
         }
@@ -50,8 +53,9 @@ bool Celda<CLAVE>::search (CLAVE key) {
 template<class CLAVE>
 bool Celda<CLAVE>::insert (CLAVE key) {
     if (is_full()) return false;
-
-    v_[nBloques_++] = key;
+    // std::cout << "Celda no esta llena\n";
+    v_[nBloques_] = key;
+    nBloques_++;
     return true;
 }
 
