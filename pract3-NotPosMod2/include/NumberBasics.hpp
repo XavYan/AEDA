@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Number.hpp"
 
 class BinaryNumber : public Number<8,2,char> {
@@ -17,7 +15,7 @@ class DecimalNumber : public Number<8,10,char> {
     DecimalNumber(int n) : Number<8,10,char>(n) {}
 };
 
-class HexadecimalNumber : public Number<8,8,char> {
+class HexadecimalNumber : public Number<8,16,char> {
     public:
-    HexadecimalNumber(int n) : Number<8,8,char>(n) {}
+    HexadecimalNumber(int n) : Number<8,16,char>(n) {}
 };

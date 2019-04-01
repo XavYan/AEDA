@@ -4,12 +4,12 @@
 #include <cassert>
 #include <cstdlib>
 #include <cmath>
-#include "../include/NumberException.hpp"
-#include "../include/NumberBase.hpp"
+#include "NumberException.hpp"
+#include "NumberBase.hpp"
 
 //Los unsigned char usan un rango entre 0 y 255. Los char usan valores con signo para su representacion numerica
 template<std::size_t N, std::size_t B, class T = char>
-class Number : NumberBase {
+class Number : public NumberBase {
 private:
   T* number_;
   bool sign_;
@@ -35,11 +35,17 @@ public:
   Number<N,B,T>& operator= (const Number<N,B,T>& num);
 
   //Operadores
-  Number<N,B,T> operator+ (const Number<N,B,T>& num);
-  Number<N,B,T> operator- (const Number<N,B,T>& num);
-  Number<N,B,T> operator* (const Number<N,B,T>& num);
-  Number<N,B,T> operator/ (const Number<N,B,T>& num);
-  operator Number<N+1,B,T> (void);
+  Number<N,B,T> operator+ (const Number<N,B,T>& num) const;
+  Number<N,B,T> operator- (const Number<N,B,T>& num) const;
+  // Number<N,B,T> operator* (const Number<N,B,T>& num) const;
+  Number<N,B,T> operator/ (const Number<N,B,T>& num) const;
+
+  //De la clase NumberBase
+  NumberBase* operator+ (const NumberBase* num) const;
+  NumberBase* operator- (const NumberBase* num) const;
+  // NumberBase* operator* (const NumberBase* num) const;
+  NumberBase* operator/ (const NumberBase* num) const;
+  virtual NumberBase* duplicate (void) const;
 
 
   //Comparadores
@@ -52,14 +58,14 @@ private:
   void to_base(int n);
 
   //Metodos de operaciones en valor absoluto
-  Number<N,B,T> add (const Number<N,B,T>& Num1, const Number<N,B,T>& Num2);
-  Number<N,B,T> sub (const Number<N,B,T>& Num1, const Number<N,B,T>& Num2);
-  Number<N,B,T> mult (const Number<N,B,T>& Num1, const Number<N,B,T>& Num2);
+  Number<N,B,T> add (const Number<N,B,T>& Num1, const Number<N,B,T>& Num2) const;
+  Number<N,B,T> sub (const Number<N,B,T>& Num1, const Number<N,B,T>& Num2) const;
+  // Number<N,B,T> mult (const Number<N,B,T>& Num1, const Number<N,B,T>& Num2) const;
 };
 
 //METODOS PUBLICOS///////////////////////////////////////////////
 template<std::size_t N, std::size_t B, class T>
-Number<N,B,T>::Number (int value): number_(NULL), sign_(0), NumberBase(N,B) {
+Number<N,B,T>::Number (int value): NumberBase(N,B), number_(NULL), sign_(0) {
 
   //Para tipo 'int' no es posible bases superiores a 10
   if (!(std::is_same<T,char>::value) && B > 10) throw invalid_argument_exception();
@@ -84,7 +90,7 @@ Number<N,B,T>::Number (int value): number_(NULL), sign_(0), NumberBase(N,B) {
 }
 
 template <std::size_t N, std::size_t B, class T>
-Number<N, B, T>::Number(const Number<N, B, T> &A) : number_(new T [N]), sign_(0), NumberBase(N,B) {
+Number<N, B, T>::Number(const Number<N, B, T> &A) : NumberBase(N,B), number_(new T [N]), sign_(0) {
 
   //Para tipo 'int' no es posible bases superiores a 10
   if (!(std::is_same<T,char>::value) && B > 10) throw invalid_argument_exception();
@@ -191,7 +197,7 @@ Number<N,B,T> Number<N,B,T>::reverse (void) const {
   }  
 
   template<std::size_t N, std::size_t B, class T>
-  Number<N,B,T> Number<N,B,T>::operator+ (const Number<N,B,T>& num) {
+  Number<N,B,T> Number<N,B,T>::operator+ (const Number<N,B,T>& num) const {
     //Creamos el objeto que almacenará el resultado
     Number<N,B,T> sum;
 
@@ -220,7 +226,7 @@ Number<N,B,T> Number<N,B,T>::reverse (void) const {
   }
 
   template<std::size_t N, std::size_t B, class T>
-  Number<N,B,T> Number<N,B,T>::operator- (const Number<N,B,T>& num) {
+  Number<N,B,T> Number<N,B,T>::operator- (const Number<N,B,T>& num) const {
     Number<N,B,T> resta;
 
     //Casos posibles
@@ -245,8 +251,8 @@ Number<N,B,T> Number<N,B,T>::reverse (void) const {
     return resta;
   }
 
-  template<std::size_t N, std::size_t B, class T>
-  Number<N,B,T> Number<N,B,T>::operator* (const Number<N,B,T>& num) {
+  /*template<std::size_t N, std::size_t B, class T>
+  Number<N,B,T> Number<N,B,T>::operator* (const Number<N,B,T>& num) const {
     Number<N,B,T> result;
 
     //Casos posibles
@@ -264,10 +270,10 @@ Number<N,B,T> Number<N,B,T>::reverse (void) const {
     }
 
     return result;
-  }
+  }*/
 
   template<std::size_t N, std::size_t B, class T>
-  Number<N,B,T> Number<N,B,T>::operator/ (const Number<N,B,T>& num) {
+  Number<N,B,T> Number<N,B,T>::operator/ (const Number<N,B,T>& num) const {
     if (num == 0) throw invalid_argument_exception();
     if(*this < num) return Number<N,B,T>();
 
@@ -289,12 +295,43 @@ Number<N,B,T> Number<N,B,T>::reverse (void) const {
     return coc;
   }
 
-template <std::size_t N, std::size_t B, class T>
-Number<N,B,T>::operator Number<N+1,B,T>(void) {
-    Number<N+1,B,T> result;
-    return result;
+template<std::size_t N, std::size_t B, class T>
+NumberBase* Number<N,B,T>::operator+ (const NumberBase* num) const {
+  const Number<N,B,T>* num_ptr = dynamic_cast<const Number<N,B,T>*>(num);
+  Number<N,B,T>* result = dynamic_cast<Number<N,B,T>*>(duplicate());
+  (*result) = (*this) + (*num_ptr);
+  return result;
 }
-  
+
+template<std::size_t N, std::size_t B, class T>
+NumberBase* Number<N,B,T>::operator- (const NumberBase* num) const {
+  const Number<N,B,T>* num_ptr = dynamic_cast<const Number<N,B,T>*>(num);
+  Number<N,B,T>* result = dynamic_cast<Number<N,B,T>*>(duplicate());
+  (*result) = (*this) - (*num_ptr);
+  return result;
+}
+
+/*template<std::size_t N, std::size_t B, class T>
+NumberBase* Number<N,B,T>::operator* (const NumberBase* num) const {
+  const Number<N,B,T>* num_ptr = dynamic_cast<const Number<N,B,T>*>(num);
+  Number<N,B,T>* result = dynamic_cast<Number<N,B,T>*>(duplicate());
+  (*result) = (*this) * (*num_ptr);
+  return result;
+}*/
+
+template<std::size_t N, std::size_t B, class T>
+NumberBase* Number<N,B,T>::operator/ (const NumberBase* num) const {
+  const Number<N,B,T>* num_ptr = dynamic_cast<const Number<N,B,T>*>(num);
+  Number<N,B,T>* result = dynamic_cast<Number<N,B,T>*>(duplicate());
+  (*result) = (*this) / (*num_ptr);
+  return result;
+}
+
+template<std::size_t N, std::size_t B, class T>
+NumberBase* Number<N,B,T>::duplicate (void) const {
+  return (new Number<N,B,T>);
+}
+
 template<std::size_t N, std::size_t B, class T>
 bool Number<N,B,T>::operator> (const Number<N,B,T>& num) const {
   for (int i = N-1; i >= 0; i--) {
@@ -342,7 +379,7 @@ void Number<N,B,T>::to_base (int n) {
 
 //Realiza la operacion Num1 + Num2 con Num1 y Num2 valores sin signo
 template<std::size_t N, std::size_t B, class T>
-Number<N,B,T> Number<N,B,T>::add (const Number<N,B,T>& Num1, const Number<N,B,T>& Num2) {
+Number<N,B,T> Number<N,B,T>::add (const Number<N,B,T>& Num1, const Number<N,B,T>& Num2) const {
   bool carry = 0;
   int sum = 0;
 
@@ -384,20 +421,8 @@ Number<N,B,T> Number<N,B,T>::add (const Number<N,B,T>& Num1, const Number<N,B,T>
     else result[i] = sum + (std::is_same<T,char>::value ? '0' : 0);
   }
   //Si carry = 1 significa que hay overflow
-  if (carry != 0)
-  {
-    std::cout << "Ha ocurrido un overflow:";
-    Number<N+1,B,T> overflow;
-    for (int i = 0; i < N+1; i++) {
-      overflow[i] = result[i];
-    }
-    overflow[N] = carry + (std::is_same<T,char>::value ? '0' : 0);
-    std::cout << "Resultado: " << overflow << '\n';
-    throw overflow_exeption();
-  }
+  if (carry != 0) throw overflow_exeption();
 
-  
-    
   Number<N,B,T> final_number;
   for (int i = 0; i < N; i++) {
     final_number[i] = result[i];
@@ -412,7 +437,7 @@ Number<N,B,T> Number<N,B,T>::add (const Number<N,B,T>& Num1, const Number<N,B,T>
 
 //Realiza la operacion Num1 - Num2 con Num1 y Num2 valores sin signo
 template<std::size_t N, std::size_t B, class T>
-Number<N,B,T> Number<N,B,T>::sub (const Number<N,B,T>& Num1, const Number<N,B,T>& Num2) {
+Number<N,B,T> Number<N,B,T>::sub (const Number<N,B,T>& Num1, const Number<N,B,T>& Num2) const {
   bool carry = 0;
   int rest = 0;
 
@@ -468,8 +493,8 @@ Number<N,B,T> Number<N,B,T>::sub (const Number<N,B,T>& Num1, const Number<N,B,T>
   return final_number;
 }
 
-template<std::size_t N, std::size_t B, class T>
-Number<N,B,T> Number<N,B,T>::mult (const Number<N,B,T>& Num1, const Number<N,B,T>& Num2) {
+/*template<std::size_t N, std::size_t B, class T>
+Number<N,B,T> Number<N,B,T>::mult (const Number<N,B,T>& Num1, const Number<N,B,T>& Num2) const {
   int carry = 0;
   int mult = 0;
   int num1, num2;
@@ -532,11 +557,11 @@ Number<N,B,T> Number<N,B,T>::mult (const Number<N,B,T>& Num1, const Number<N,B,T
   result = NULL;
 
   return final_result;
-}
+}*/
 
 // CLASE ESPECIAL PARA BASE = 2 ////////////////////////////////////////////////////////////////////
 template <std::size_t N, class T>
-class Number<N,2,T> : NumberBase {
+class Number<N,2,T> : public NumberBase {
 private:
   T* number_;
 public:
@@ -561,11 +586,17 @@ public:
   Number<N,2,T>& operator= (const Number<N,2,T>& num);
 
   //Operadores
-  Number<N,2,T> operator+ (const Number<N,2,T>& num);
-  Number<N,2,T> operator- (const Number<N,2,T>& num);
-  Number<N,2,T> operator* (const Number<N,2,T>& num);
-  Number<N,2,T> operator/ (const Number<N,2,T>& num);
-  operator Number<N+1,2,T> (void);
+  Number<N,2,T> operator+ (const Number<N,2,T>& num) const;
+  Number<N,2,T> operator- (const Number<N,2,T>& num) const;
+  // Number<N,2,T> operator* (const Number<N,2,T>& num) const;
+  Number<N,2,T> operator/ (const Number<N,2,T>& num) const;
+
+  //De la clase NumberBase
+  NumberBase* operator+ (const NumberBase* num) const;
+  NumberBase* operator- (const NumberBase* num) const;
+  // NumberBase* operator* (const NumberBase* num) const;
+  NumberBase* operator/ (const NumberBase* num) const;
+  virtual NumberBase* duplicate (void) const;
 
   //Comparadores
   bool operator> (const Number<N,2,T>& num) const;
@@ -577,14 +608,14 @@ private:
   void to_base(int n);
 
   //Metodos de operaciones en valor absoluto
-  Number<N,2,T> add (const Number<N,2,T>& Num1, const Number<N,2,T>& Num2);
-  Number<N,2,T> sub (const Number<N,2,T>& Num1, const Number<N,2,T>& Num2);
-  Number<N,2,T> mult (const Number<N,2,T>& Num1, const Number<N,2,T>& Num2);
+  Number<N,2,T> add (const Number<N,2,T>& Num1, const Number<N,2,T>& Num2) const;
+  Number<N,2,T> sub (const Number<N,2,T>& Num1, const Number<N,2,T>& Num2) const;
+  // Number<N,2,T> mult (const Number<N,2,T>& Num1, const Number<N,2,T>& Num2) const;
 };
 
 //METODOS PUBLICOS///////////////////////////////////////////////
 template<std::size_t N, class T>
-Number<N,2,T>::Number (int value): number_(NULL), NumberBase(N,2) {
+Number<N,2,T>::Number (int value): NumberBase(N,2), number_(NULL) {
 
   if (value < pow(2,N-1)*(-1) || value > (pow(2,N-1)-1)) throw overflow_exeption();
 
@@ -609,7 +640,7 @@ Number<N,2,T>::Number (int value): number_(NULL), NumberBase(N,2) {
 }
 
 template <std::size_t N, class T>
-Number<N,2,T>::Number(const Number<N, 2, T> &A) : number_(NULL), NumberBase(N,2) {
+Number<N,2,T>::Number(const Number<N, 2, T> &A) : NumberBase(N,2), number_(NULL) {
 
   number_ = new T [N];
 
@@ -715,13 +746,13 @@ Number<N,2,T>& Number<N,2,T>::operator= (const Number<N,2,T>& num) {
 }
 
 template<std::size_t N, class T>
-Number<N,2,T> Number<N,2,T>::operator+ (const Number<N,2,T>& num) {
+Number<N,2,T> Number<N,2,T>::operator+ (const Number<N,2,T>& num) const {
   /* En complemento a 2 la propia suma nos dira el signo del resultado, por lo que nos basta con sumar */
   return add(*this, num);
 }
 
 template<std::size_t N, class T>
-Number<N,2,T> Number<N,2,T>::operator- (const Number<N,2,T>& num) {
+Number<N,2,T> Number<N,2,T>::operator- (const Number<N,2,T>& num) const {
   /*
   La resta en binario se puede traducir a realizar el complemento a 2 al segundo valor y sumar el primero
   dicho resultado
@@ -729,8 +760,8 @@ Number<N,2,T> Number<N,2,T>::operator- (const Number<N,2,T>& num) {
   return sub(*this,num); //El metodo 'sub' se encargara de hacer lo mencionado arriba
 }
 
-template<std::size_t N, class T>
-Number<N,2,T> Number<N,2,T>::operator* (const Number<N,2,T>& num) {
+/*template<std::size_t N, class T>
+Number<N,2,T> Number<N,2,T>::operator* (const Number<N,2,T>& num) const {
   Number<N,2,T> result;
 
   //Casos posibles
@@ -748,10 +779,10 @@ Number<N,2,T> Number<N,2,T>::operator* (const Number<N,2,T>& num) {
   }
 
   return result;
-}
+}*/
 
 template<std::size_t N, class T>
-Number<N,2,T> Number<N,2,T>::operator/ (const Number<N,2,T>& num) {
+Number<N,2,T> Number<N,2,T>::operator/ (const Number<N,2,T>& num) const {
   if (num == 0) throw invalid_argument_exception(); //No se puede dividir entre 0
 
   if(abs() < num.abs()) return Number<N,2,T>();
@@ -776,11 +807,43 @@ Number<N,2,T> Number<N,2,T>::operator/ (const Number<N,2,T>& num) {
   return coc;
 }
 
-template <std::size_t N, class T>
-Number<N,2,T>::operator Number<N+1,2,T>(void) {
-    Number<N+1,2,T> result;
-    return result;
+template<std::size_t N, class T>
+NumberBase* Number<N,2,T>::operator+ (const NumberBase* num) const {
+  const Number<N,2,T>* num_ptr = dynamic_cast<const Number<N,2,T>*>(num);
+  Number<N,2,T>* result = dynamic_cast<Number<N,2,T>*>(duplicate());
+  (*result) = (*this) + (*num_ptr);
+  return result;
 }
+
+template<std::size_t N, class T>
+NumberBase* Number<N,2,T>::operator- (const NumberBase* num) const {
+  const Number<N,2,T>* num_ptr = dynamic_cast<const Number<N,2,T>*>(num);
+  Number<N,2,T>* result = dynamic_cast<Number<N,2,T>*>(duplicate());
+  (*result) = (*this) - (*num_ptr);
+  return result;
+}
+
+/*template<std::size_t N, class T>
+NumberBase* Number<N,2,T>::operator* (const NumberBase* num) const {
+  const Number<N,2,T>* num_ptr = dynamic_cast<const Number<N,2,T>*>(num);
+  Number<N,2,T>* result = dynamic_cast<Number<N,2,T>*>(duplicate());
+  (*result) = (*this) * (*num_ptr);
+  return result;
+}*/
+
+template<std::size_t N, class T>
+NumberBase* Number<N,2,T>::operator/ (const NumberBase* num) const {
+  const Number<N,2,T>* num_ptr = dynamic_cast<const Number<N,2,T>*>(num);
+  Number<N,2,T>* result = dynamic_cast<Number<N,2,T>*>(duplicate());
+  (*result) = (*this) / (*num_ptr);
+  return result;
+}
+
+template<std::size_t N, class T>
+NumberBase* Number<N,2,T>::duplicate (void) const {
+  return (new Number<N,2,T>);
+}
+
 
 template <std::size_t N, class T>
 bool Number<N, 2, T>::operator>(const Number<N, 2, T> &num) const
@@ -855,7 +918,7 @@ void Number<N,2,T>::to_base (int n) {
 
 //Realiza la operacion Num1 + Num2 con Num1 y Num2 valores sin signo
 template<std::size_t N, class T>
-Number<N,2,T> Number<N,2,T>::add (const Number<N,2,T>& Num1, const Number<N,2,T>& Num2) {
+Number<N,2,T> Number<N,2,T>::add (const Number<N,2,T>& Num1, const Number<N,2,T>& Num2) const {
   bool carry = 0;
   int sum = 0;
 
@@ -899,19 +962,8 @@ Number<N,2,T> Number<N,2,T>::add (const Number<N,2,T>& Num1, const Number<N,2,T>
 
   //Comprobamos el overflow
   if (Num1.is_negative() == Num2.is_negative()) { //Si los signos son iguales, hay posible overflow
-    if (result[N-1] != Num1[N-1]) {
-      
-      std::cout << "Overflow exception. Should be: ";
-      Number<N+1,2,T> overflow;
-      for (int i = 0; i < N; i++) {
-        overflow[i] = result[i];
-      }
-      overflow[N] = Num1[N-1];
-      std::cout << overflow << '\n';
-      throw overflow_exeption();
-    }
+    if (result[N-1] != Num1[N-1]) throw overflow_exeption();
   }
-
   Number<N,2,T> final_number;
   for (int i = 0; i < N; i++) {
     final_number[i] = result[i];
@@ -926,13 +978,13 @@ Number<N,2,T> Number<N,2,T>::add (const Number<N,2,T>& Num1, const Number<N,2,T>
 
 //Realiza la operacion Num1 - Num2 con Num1 y Num2 valores sin signo
 template<std::size_t N, class T>
-Number<N,2,T> Number<N,2,T>::sub (const Number<N,2,T>& Num1, const Number<N,2,T>& Num2) {
+Number<N,2,T> Number<N,2,T>::sub (const Number<N,2,T>& Num1, const Number<N,2,T>& Num2) const {
   /* En este caso la resta se traduce a realizar el complemento a 2 (invertir el signo) de Num2 y sumarle Num1 */
   return add(Num1,Num2.reverse());
 }
 
-template<std::size_t N, class T>
-Number<N,2,T> Number<N,2,T>::mult (const Number<N,2,T>& Num1, const Number<N,2,T>& Num2) {
+/*template<std::size_t N, class T>
+Number<N,2,T> Number<N,2,T>::mult (const Number<N,2,T>& Num1, const Number<N,2,T>& Num2) const {
   int carry = 0;
   int mult = 0;
   int num1, num2;
@@ -990,9 +1042,9 @@ Number<N,2,T> Number<N,2,T>::mult (const Number<N,2,T>& Num1, const Number<N,2,T
     final_result[i] = sum[i];
   }
 
-  //Liberamos memoria de result y Nresult
+  //Liberamos memoria de result
   delete[] result;
   result = NULL;
 
   return final_result;
-}
+}*/
