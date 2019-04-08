@@ -19,9 +19,6 @@ FDispersionBase<CLAVE>::FDispersionBase (void) {}
 template <class CLAVE>
 FDispersionBase<CLAVE>::~FDispersionBase (void) {}
 
-// template <class CLAVE>
-// int FDispersionBase<CLAVE>::operator() (const CLAVE& x) const { return 0; }
-
 template <class CLAVE>
 class FDispersionMod : public FDispersionBase<CLAVE> {
     private:

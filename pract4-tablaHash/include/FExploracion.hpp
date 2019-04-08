@@ -20,9 +20,6 @@ FExploracionBase<CLAVE>::FExploracionBase (void) {}
 template <class CLAVE>
 FExploracionBase<CLAVE>::~FExploracionBase (void) {}
 
-// template <class CLAVE>
-// int FExploracionBase<CLAVE>::operator() (const CLAVE& x, const int& i) { return 0; }
-
 template <class CLAVE>
 class FExploracionLineal : public FExploracionBase<CLAVE> {
     private:
@@ -82,7 +79,7 @@ class FExploracionReDisp : public FExploracionBase<CLAVE> {
 
     int operator() (const CLAVE& x, const int& i) { //FALLA, REVISAR
         srand(x);
-        int result;
+        int result = 0;
         for (int j = 0; j < i; j++) {
             result = rand() % nCeldas_;
         }

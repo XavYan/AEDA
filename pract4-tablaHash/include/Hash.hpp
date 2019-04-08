@@ -101,10 +101,7 @@ bool tablaHash<CLAVE>::insert (const CLAVE& x) {
 
     ++cont_;
     bool inserted = vCeldas_[H_->operator()(x)].insert(x);
-    // std::cout << "Hemos insertado la celda en la posicion:" << H_->operator()(x) << '\n';
     if (inserted) return true;
-
-    // std::cout << "No se pudo insertar el elemento. Usando funcion exploracion\n";
 
     for (int i = 0; i < nCeldas_; i++) {
         ++cont_;

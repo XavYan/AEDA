@@ -40,7 +40,7 @@ void test::test_insert (void) {
 
     for (unsigned i = 0; i < nPruebas_; i++) {
         table_.get_cont().start();
-        table_.insert(v_[N_+i]);
+        table_.insert(v_[N_+i]+(v_[N_+i]%23));
         acc_ += table_.get_cont().end();
         if (table_.get_cont().end() < min_) min_ = table_.get_cont().end();
         if (table_.get_cont().end() > max_)

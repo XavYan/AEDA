@@ -81,7 +81,7 @@ int main() {
     std::cout << celdas << '\t' << claves << '\t';
     if (fd == ADD) std::cout << "ADD\t";
     if (fd == MOD) std::cout << "MOD\t";
-    if (fd == PSEUDO_RAND) std::cout << "PSEUDO_RAND\t";
+    if (fd == PSEUDO_RAND) std::cout << "PSEUDO_RAND\t\t";
 
     if (fe == LINEAR) std::cout << "\tLINEAR\t\t";
     if (fe == QUADRATIC) std::cout << "QUADRATIC\t";
