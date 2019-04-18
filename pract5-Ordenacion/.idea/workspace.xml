@@ -10,54 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9e93315-1f33-43a0-8812-44dbc6915b35" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/pract5-Ordenacion.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/sort_methods.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/24bdc2ec0fc2421e/main_real.ipch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/24bdc2ec0fc2421e/mmap_address.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/29e4248610490d51/FExploracion.ipch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/29e4248610490d51/mmap_address.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/4f5e92131ce162c3/FDispersion.ipch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/4f5e92131ce162c3/mmap_address.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/5cd223933d364dfa/DNI.ipch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/5cd223933d364dfa/mmap_address.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/5d510ea2803660ee/Contador.ipch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/5d510ea2803660ee/mmap_address.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/62fd41539957eb2d/mmap_address.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/62fd41539957eb2d/test.ipch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/90904651565b77a8/Celda.ipch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/90904651565b77a8/mmap_address.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/a5001ee43aaeaa8b/main_real.ipch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/a5001ee43aaeaa8b/mmap_address.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/a8093a220dc8f545/DNI.ipch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/a8093a220dc8f545/mmap_address.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/a81310d55eeb5239/Hash.ipch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/a81310d55eeb5239/mmap_address.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/af81110c261ea95/Contador.ipch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/af81110c261ea95/mmap_address.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/c1f31bc3551288fb/main.ipch" beforeDir="false" afterPath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/c1f31bc3551288fb/main.ipch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/c1f31bc3551288fb/mmap_address.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/c1f31bc3551288fb/mmap_address.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/d7be5583f05e69ec/main_aux.ipch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/d7be5583f05e69ec/mmap_address.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/e532aeb10dec7146/mmap_address.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/e532aeb10dec7146/mmap_address.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/e532aeb10dec7146/test.ipch" beforeDir="false" afterPath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/e532aeb10dec7146/test.ipch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/febb85d867575282/main_aux.ipch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/ipch/febb85d867575282/mmap_address.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/.vscode/tasks.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/bin/main" beforeDir="false" afterPath="$PROJECT_DIR$/../pract4-tablaHash/bin/main" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/include/Celda.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../pract4-tablaHash/include/Celda.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/include/FDispersion.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../pract4-tablaHash/include/FDispersion.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/include/FExploracion.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../pract4-tablaHash/include/FExploracion.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/include/Hash.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../pract4-tablaHash/include/Hash.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../pract4-tablaHash/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pract4-tablaHash/src/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../pract4-tablaHash/src/test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/main" beforeDir="false" afterPath="$PROJECT_DIR$/build/main" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/sort_methods.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/sort_methods.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,24 +25,29 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+            <state relative-caret-position="531">
+              <caret line="76" column="5" lean-forward="true" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/sort_methods.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
+            <state relative-caret-position="166">
+              <caret line="143" column="43" selection-start-line="143" selection-start-column="43" selection-end-line="143" selection-end-column="43" />
               <folding>
                 <element signature="e#63#76#0" expanded="true" />
-                <element signature="e#377#390#0" expanded="true" />
+                <element signature="e#1032#1045#0" expanded="true" />
+                <element signature="e#1272#1285#0" expanded="true" />
+                <element signature="e#1594#1607#0" expanded="true" />
+                <element signature="e#1594#1607#0" expanded="true" />
+                <element signature="e#2460#2473#0" expanded="true" />
+                <element signature="e#2460#2473#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -95,8 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/DNI.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="301">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
             </state>
           </provider>
         </entry>
@@ -105,7 +66,7 @@
         <entry file="file://$PROJECT_DIR$/src/DNI.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="29" lean-forward="true" selection-start-column="29" selection-end-column="29" />
+              <caret column="29" selection-start-column="29" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -122,8 +83,8 @@
         <option value="$PROJECT_DIR$/src/sort_methods.cpp" />
         <option value="$PROJECT_DIR$/include/DNI.hpp" />
         <option value="$PROJECT_DIR$/src/DNI.cpp" />
-        <option value="$PROJECT_DIR$/src/main.cpp" />
         <option value="$PROJECT_DIR$/include/sort_methods.hpp" />
+        <option value="$PROJECT_DIR$/src/main.cpp" />
       </list>
     </option>
   </component>
@@ -141,7 +102,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -163,6 +123,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -198,11 +159,13 @@
       <updated>1554735554697</updated>
       <workItem from="1554735560458" duration="286000" />
       <workItem from="1554735853183" duration="6628000" />
+      <workItem from="1554797111203" duration="832000" />
+      <workItem from="1555609370168" duration="6929000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6914000" />
+    <option name="totallyTimeSpent" value="14675000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -216,7 +179,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1366" height="738" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15075758" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14545454" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -228,7 +191,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32840723" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32840723" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -247,45 +210,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sort_methods.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-          <folding>
-            <element signature="e#89#102#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sort_methods.cpp" />
     <entry file="file://$PROJECT_DIR$/src/DNI.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="29" lean-forward="true" selection-start-column="29" selection-end-column="29" />
+          <caret column="29" selection-start-column="29" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/DNI.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+        <state relative-caret-position="301">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/sort_methods.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
+        <state relative-caret-position="166">
+          <caret line="143" column="43" selection-start-line="143" selection-start-column="43" selection-end-line="143" selection-end-column="43" />
           <folding>
             <element signature="e#63#76#0" expanded="true" />
-            <element signature="e#377#390#0" expanded="true" />
+            <element signature="e#1032#1045#0" expanded="true" />
+            <element signature="e#1272#1285#0" expanded="true" />
+            <element signature="e#1594#1607#0" expanded="true" />
+            <element signature="e#1594#1607#0" expanded="true" />
+            <element signature="e#2460#2473#0" expanded="true" />
+            <element signature="e#2460#2473#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="76" column="5" lean-forward="true" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
         </state>
       </provider>
     </entry>
