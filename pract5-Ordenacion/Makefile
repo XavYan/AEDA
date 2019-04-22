@@ -19,4 +19,4 @@ $(BUILD)/$(EXECUTABLE): $(SRC)/*.cpp
 	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(BUILD) $^ -o $@ $(LIBRARIES)
 
 clean:
-	-rm $(BUILD)/*
+	-rm $(BUILD)/main
