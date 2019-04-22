@@ -9,14 +9,23 @@ LIBRARIES	:=
 EXECUTABLE	:= main
 
 
-all: $(BUILD)/$(EXECUTABLE)
+all: demos est
 
-run: clean all
+rund:
 	clear
-	./$(BUILD)/$(EXECUTABLE)
+	./$(BUILD)/demos
 
-$(BUILD)/$(EXECUTABLE): $(SRC)/*.cpp
-	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(BUILD) $^ -o $@ $(LIBRARIES)
+rune:
+	clear
+	./$(BUILD)/est
+
+demos: clean
+	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(BUILD) $(SRC)/DNI.cpp $(SRC)/main_demos.cpp -o $(BUILD)/$@ $(LIBRARIES)
+
+est: clean
+	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(BUILD) $(SRC)/DNI.cpp $(SRC)/main_est.cpp -o $(BUILD)/$@ $(LIBRARIES)
+
 
 clean:
-	-rm $(BUILD)/main
+	-rm $(BUILD)/est
+	-rm $(BUILD)/demos

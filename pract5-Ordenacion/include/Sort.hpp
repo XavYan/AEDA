@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <iomanip>
-#include "Contador.hpp"
 
 enum sMethods { SELECT, CHANGE, HEAPSORT, MERGESORT, SHELLSORT };
 
@@ -270,7 +269,7 @@ int Sort<CLAVE>::merge (CLAVE* v, int tam, int ini, int cen, int fin) {
 
    int i = ini; int j = cen + 1; int k = ini;
    CLAVE* aux = new CLAVE [tam];
-   std::cout << "Fusionando vectores...\n";
+   if (mode_ == 0) std::cout << "Fusionando vectores...\n";
    while ((i <= cen) && (j <= fin)) {
       acc++;
       if (mode_ == 0) std::cout << "COMPARANDO [" << v[i] << "] Y [" << v[j] << "]\n";
