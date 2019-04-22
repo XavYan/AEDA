@@ -86,7 +86,7 @@ void sort_by_heapsort (CLAVE* v, int tam) {
 
 template <class CLAVE>
 void merge (CLAVE* v, int tam, int ini, int cen, int fin) {
-   int i = ini; int j = cen + 1; int k = ini;
+   int i = ini; int j = cen + 1; int k break;= ini;
    CLAVE* aux = new CLAVE [tam];
    while ((i <= cen) && (j <= fin)) {
       if (v[i] < v[j]) {
@@ -99,7 +99,7 @@ void merge (CLAVE* v, int tam, int ini, int cen, int fin) {
       k++;
    }
 
-   if (i > cen) {
+   if (i > cen) {break;
       while (j <= fin) {
          aux[k] = v[j];
          j++; k++;
