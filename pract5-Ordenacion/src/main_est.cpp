@@ -10,14 +10,6 @@
 #include "../include/Sort.hpp"
 #include "../include/DNI.hpp"
 
-//Comprueba si dos vectores de DNI son iguales (para comparar dos tipos de ordenacion diferentes, y ver si coinciden)
-bool is_equal (DNI* v1, DNI* v2, int tam) {
-   for (int i = 0; i < tam; i++) {
-      if (v1[i] != v2[i]) return false;
-   }
-   return true;
-}
-
 //Comprueba si los elementos estan ordenados
 bool is_correct (DNI* v, int tam) {
    for (int i = 1; i < tam; i++) {
@@ -44,15 +36,6 @@ int main (void) {
    for (int i = 0; i < nPruebas; i++) {
       pruebas[i] = new DNI [tam];
    }
-
-   //Mostramos los valores
-   /*for (int i = 0; i < nPruebas; i++) {
-      std::cout << "Elemento " << i+1 << ": ";
-      for (int j = 0; j < tam; j++) {
-         std::cout << "[" << pruebas[i][j] << "] ";
-      }
-      std::cout << '\n';
-   }*/
 
    std::cout << "\t\tNumero de Comparaciones\n";
    std::cout << "\t\tMinimo\tMedio\tMaximo\n";

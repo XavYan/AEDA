@@ -301,6 +301,7 @@ int Sort<CLAVE>::merge (CLAVE* v, int tam, int ini, int cen, int fin) {
    for (int s = ini; s <= fin; s++) {
       v[s] = aux[s];
    }
+   delete [] aux;
    return acc;
 }
 
