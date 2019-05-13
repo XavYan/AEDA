@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "../include/DNI.hpp"
-#include "../include/ABB.hpp"
+#include "../include/AVL.hpp"
 #include "../include/Contador.hpp"
 
 int main (void) {
@@ -20,10 +20,10 @@ int main (void) {
 
    DNI* valores = new DNI [2*n];
 
-   ABB<DNI> arbol;
+   AVL<DNI> arbol;
 
    for (int i = 0; i < n; i++) {
-      arbol.insert(valores[i]);
+      arbol.insertar(valores[i]);
    }
 
    //Imprimimos la primera fila de la tabla
@@ -35,9 +35,9 @@ int main (void) {
    min = 100000000;
    acc = max = 0;
    for (int i = 0; i < nPruebas; i++) {
-      ABB<DNI>::cont_.start();
-      arbol.search(valores[i]);
-      int resultado = ABB<DNI>::cont_.end();
+      AVL<DNI>::cont_.start();
+      arbol.buscar(valores[i]);
+      int resultado = AVL<DNI>::cont_.end();
       if (min > resultado) min = resultado;
       if (max < resultado) max = resultado;
       acc += resultado;
@@ -49,9 +49,9 @@ int main (void) {
    min = 100000000;
    acc = max = 0;
    for (int i = n; i < n+nPruebas; i++) {
-      ABB<DNI>::cont_.start();
-      arbol.insert(valores[i]);
-      int resultado = ABB<DNI>::cont_.end();
+      AVL<DNI>::cont_.start();
+      arbol.insertar(valores[i]);
+      int resultado = AVL<DNI>::cont_.end();
       if (min > resultado) min = resultado;
       if (max < resultado) max = resultado;
       acc += resultado;

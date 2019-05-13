@@ -5,7 +5,7 @@
 #pragma once
 
 #include "nodoBB.hpp"
-#include "Contador.hpp"
+//#include "Contador.hpp"
 #include <queue> // std::queue
 #include <utility> // std::pair
 
